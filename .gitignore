@@ -1,0 +1,42 @@
+# Local player state, temporary saves, and GameAnalytics exports
+android_retention_keys.txt*
+live-events*.json*
+
+# Local credentials (keep example configuration files)
+config.local.json*
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Python bytecode, virtual environments, and tool caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python build output
+build/
+dist/
+*.egg-info/
+
+# Local logs, editor settings, and OS files
+*.log
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini
+.DS_Store

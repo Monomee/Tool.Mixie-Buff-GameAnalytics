@@ -1,0 +1,15 @@
+{
+  "game_key": "",
+  "secret_key": "",
+  "live_events_file": "live-events.json",
+  "sdk_version": "unity 0.0.0",
+  "engine_version": "unity 0.0.0",
+  "build": "0.0.0",
+  "platform": "android",
+  "android_bundle_id": "com.example.game",
+  "android_app_version": "0.0.0",
+  "android_app_build": "1",
+  "android_app_signature": "",
+  "android_channel_id": "com.google.android.packageinstaller",
+  "connection_type": "wwan"
+}
