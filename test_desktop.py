@@ -10,6 +10,51 @@ import ToolDesktop as desktop
 
 
 class DesktopTests(unittest.TestCase):
+    def test_english_validation_and_runner_messages(self):
+        with self.assertRaisesRegex(ValueError, 'Missing Game Key or Secret Key'):
+            desktop.RunConfig(language='en', dry_run=False,
+                              game_key='', secret_key='').validate()
+        with tempfile.TemporaryDirectory() as folder:
+            messages = []
+            runner = desktop.DesktopRunner(self.config(language='en'),
+                                           Path(folder) / 'state.txt', log=messages.append)
+            result = runner.run()
+            self.assertEqual(result['completed'], 1)
+            self.assertTrue(any('[PLAN]' in message for message in messages))
+            self.assertTrue(any('[DRY RUN]' in message for message in messages))
+            self.assertFalse(any('[THỬ]' in message for message in messages))
+
+    def test_translations_have_matching_format_fields(self):
+        import string
+        formatter = string.Formatter()
+        for source, translated in desktop.ENGLISH.items():
+            with self.subTest(source=source):
+                fields = lambda text: {field for _, field, _, _ in formatter.parse(text)
+                                       if field is not None}
+                self.assertEqual(fields(source), fields(translated))
+
+    def test_language_switch_preserves_form_values_and_mode(self):
+        try:
+            root = desktop.tk.Tk()
+        except desktop.tk.TclError as error:
+            self.skipTest(str(error))
+        root.withdraw()
+        try:
+            app = desktop.DesktopApp(root)
+            app.values['users'].set('7')
+            app.values['mode'].set('Kết hợp mới / returning')
+            app.language.set('English')
+            app.change_language()
+            self.assertEqual(app.start_button.cget('text'), 'Start')
+            self.assertEqual(app.values['users'].get(), '7')
+            self.assertEqual(app.values['mode'].get(), 'Mixed new / returning')
+            app.language.set('Tiếng Việt')
+            app.change_language()
+            self.assertEqual(app.start_button.cget('text'), 'Bắt đầu')
+            self.assertEqual(app.values['mode'].get(), 'Kết hợp mới / returning')
+        finally:
+            root.destroy()
+
     def config(self, **kwargs):
         kwargs.setdefault('game_key', 'test-game')
         kwargs.setdefault('secret_key', 'test-secret')

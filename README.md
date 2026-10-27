@@ -31,6 +31,7 @@ Chỉ đưa `config.example.json` chứa giá trị mẫu lên Git. Không chia 
 
 ## Sử dụng
 
+- **Ngôn ngữ / Language:** chọn **Tiếng Việt** hoặc **English** ở đầu cửa sổ. Nhãn, trạng thái và thông báo kiểm tra dữ liệu đổi ngay, giữ nguyên cấu hình đang nhập. Mặc định Tiếng Việt mỗi lần mở; bộ chọn tạm khóa khi đang chạy. Log cũ và thông báo kỹ thuật từ Python, hệ điều hành hoặc dịch vụ giữ nguyên ngôn ngữ gốc.
 - **Tạo user mới:** sinh UUID mới cho từng user.
 - **Chạy lại user đã lưu:** chọn user có phiên trước đó trong `android_retention_keys.txt`.
 - **Returning từ JSON:** chọn file export GameAnalytics dạng danh sách sự kiện. Gộp theo `user_id`, lấy `session_num`, `client_ts`, `lifetime_session_length` lớn nhất giữa JSON và trạng thái đã lưu. Chỉ chọn user có trong JSON.

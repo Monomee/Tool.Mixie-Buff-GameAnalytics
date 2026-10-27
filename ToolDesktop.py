@@ -17,6 +17,75 @@ from Tool import (BASE_DIR, GAME_KEY, SECRET_KEY, LIVE_EVENTS_FILE, MAX_TOTAL_US
                   ScalableAndroidTrafficGenerator)
 
 
+ENGLISH = {
+    'Ngôn ngữ': 'Language',
+    'Cấu hình user và phiên mô phỏng gửi đến GameAnalytics.': 'Configure users and simulated sessions sent to GameAnalytics.',
+    'User & phiên chơi': 'Users & sessions',
+    'Chế độ user': 'User mode',
+    'Tạo user mới': 'Create new users',
+    'Chạy lại user đã lưu': 'Returning saved users',
+    'Returning từ JSON': 'Returning from JSON',
+    'Kết hợp mới / returning': 'Mixed new / returning',
+    'Số user': 'Users',
+    'Phiên / user': 'Sessions / user',
+    'User đồng thời': 'Concurrent users',
+    'Returning (%) khi kết hợp': 'Returning (%) in mixed mode',
+    'Nghỉ giữa phiên (giây)': 'Pause between sessions (sec)',
+    'Thời lượng tối thiểu (phút)': 'Minimum duration (min)',
+    'Thời lượng tối đa (phút)': 'Maximum duration (min)',
+    'Gửi sự kiện sớm nhất (giây)': 'Minimum event interval (sec)',
+    'Gửi sự kiện muộn nhất (giây)': 'Maximum event interval (sec)',
+    'JSON GameAnalytics': 'GameAnalytics JSON',
+    'Chọn file…': 'Browse…',
+    'Chế độ JSON chỉ chọn ID có trong file; chế độ kết hợp gộp JSON với user đã lưu.': 'JSON mode uses IDs from the file; mixed mode combines JSON with saved users.',
+    'Project nhận dữ liệu': 'Destination project',
+    'Chạy thử — không gửi mạng, không ghi trạng thái user': 'Dry run — no network requests or user state changes',
+    'Bỏ chọn chạy thử sẽ gửi dữ liệu thật. Returning giữ ID và tăng số phiên; retention phụ thuộc ngày quay lại.': 'Disable dry run to send real data. Returning users keep their IDs and increment sessions; retention depends on the return date.',
+    'Bắt đầu': 'Start',
+    'Dừng': 'Stop',
+    'Sẵn sàng • Giới hạn pool: {limit} user': 'Ready • Pool limit: {limit} users',
+    'Cấu hình không hợp lệ': 'Invalid configuration',
+    'Đang chạy thử…': 'Dry run in progress…',
+    'Đang gửi dữ liệu thật…': 'Sending real data…',
+    'CHẠY THỬ': 'DRY RUN',
+    'GỬI THẬT': 'LIVE RUN',
+    'Đang dừng và đóng phiên hiện tại…': 'Stopping and closing the current session…',
+    'Xong {done} phiên • Lỗi {failed}': 'Completed {done} sessions • Failed {failed}',
+    'Không chạy được': 'Unable to run',
+    '[LỖI] ': '[ERROR] ',
+    'Đã dừng': 'Stopped',
+    'Hoàn tất đợt chạy': 'Run complete',
+    '{label} • {completed} phiên xong • {failed} lỗi': '{label} • {completed} sessions completed • {failed} failed',
+    'Chế độ user không hợp lệ.': 'Invalid user mode.',
+    '{name} phải là số nguyên lớn hơn 0.': '{name} must be an integer greater than 0.',
+    'Tối đa {limit} user / luồng.': 'Maximum {limit} users / workers.',
+    '{name} phải là số hữu hạn.': '{name} must be a finite number.',
+    'Thời lượng phải lớn hơn 0, tối thiểu ≤ tối đa.': 'Duration must be greater than 0, minimum ≤ maximum.',
+    'Khoảng gửi sự kiện phải lớn hơn 0, tối thiểu ≤ tối đa.': 'Event intervals must be greater than 0, minimum ≤ maximum.',
+    'Thời gian nghỉ ≥ 0 và returning nằm trong 0–100%.': 'Pause must be ≥ 0 and returning must be between 0 and 100%.',
+    'Hãy chọn file JSON từ GameAnalytics.': 'Select a GameAnalytics JSON file.',
+    'Thiếu Game Key hoặc Secret Key.': 'Missing Game Key or Secret Key.',
+    '[THỬ] /{endpoint} — {category}': '[DRY RUN] /{endpoint} — {category}',
+    'File trạng thái lỗi ở dòng {number}: {error}': 'Invalid state file at line {number}: {error}',
+    'JSON phải là danh sách sự kiện GameAnalytics.': 'JSON must be a list of GameAnalytics events.',
+    'Sự kiện JSON #{number} không phải object.': 'JSON event #{number} must be an object.',
+    'user_id không hợp lệ ở sự kiện #{number}.': 'Invalid user_id in event #{number}.',
+    'Cần {returning} returning user nhưng chỉ có {available}. Hãy giảm số lượng hoặc nhập thêm JSON.': 'Need {returning} returning users but only {available} are available. Reduce the count or import more JSON.',
+    'Pool có {count} user; thêm {new_count} sẽ vượt {limit}. Hãy chọn chạy lại user đã có.': 'The pool has {count} users; adding {new_count} would exceed {limit}. Select existing users instead.',
+    '[KẾ HOẠCH] {new_count} mới + {returning} returning; {sessions} phiên; {workers} luồng.': '[PLAN] {new_count} new + {returning} returning; {sessions} sessions; {workers} workers.',
+    '{field} phải là số nguyên không âm.': '{field} must be a non-negative integer.',
+    'client_ts / last_active không hợp lệ.': 'Invalid client_ts / last_active.',
+    '{field} không hợp lệ.': 'Invalid {field}.',
+    'Không khởi tạo được phiên.': 'Unable to initialize the session.',
+    '[LỖI] User {user}: {error}; dừng user này.': '[ERROR] User {user}: {error}; stopping this user.',
+    'Giá trị số không hợp lệ: {name}.': 'Invalid numeric value: {name}.',
+}
+
+
+def tr(text, language='vi', **values):
+    return (ENGLISH.get(text, text) if language == 'en' else text).format(**values)
+
+
 @dataclass
 class RunConfig:
     mode: str = 'new'
@@ -33,30 +102,31 @@ class RunConfig:
     dry_run: bool = True
     game_key: str = GAME_KEY
     secret_key: str = SECRET_KEY
+    language: str = 'vi'
 
     def validate(self):
         if self.mode not in ('new', 'saved', 'json', 'mixed'):
-            raise ValueError('Chế độ user không hợp lệ.')
+            raise ValueError(tr('Chế độ user không hợp lệ.', self.language))
         for name in ('users', 'sessions', 'workers'):
             value = getattr(self, name)
             if not isinstance(value, int) or value < 1:
-                raise ValueError(f'{name} phải là số nguyên lớn hơn 0.')
+                raise ValueError(tr('{name} phải là số nguyên lớn hơn 0.', self.language, name=name))
         if self.users > MAX_TOTAL_USERS or self.workers > MAX_TOTAL_USERS:
-            raise ValueError(f'Tối đa {MAX_TOTAL_USERS} user / luồng.')
+            raise ValueError(tr('Tối đa {limit} user / luồng.', self.language, limit=MAX_TOTAL_USERS))
         for name in ('duration_min', 'duration_max', 'action_min', 'action_max',
                      'pause_seconds', 'returning_percent'):
             if not math.isfinite(getattr(self, name)):
-                raise ValueError(f'{name} phải là số hữu hạn.')
+                raise ValueError(tr('{name} phải là số hữu hạn.', self.language, name=name))
         if not 0 < self.duration_min <= self.duration_max:
-            raise ValueError('Thời lượng phải lớn hơn 0, tối thiểu ≤ tối đa.')
+            raise ValueError(tr('Thời lượng phải lớn hơn 0, tối thiểu ≤ tối đa.', self.language))
         if not 0 < self.action_min <= self.action_max:
-            raise ValueError('Khoảng gửi sự kiện phải lớn hơn 0, tối thiểu ≤ tối đa.')
+            raise ValueError(tr('Khoảng gửi sự kiện phải lớn hơn 0, tối thiểu ≤ tối đa.', self.language))
         if self.pause_seconds < 0 or not 0 <= self.returning_percent <= 100:
-            raise ValueError('Thời gian nghỉ ≥ 0 và returning nằm trong 0–100%.')
+            raise ValueError(tr('Thời gian nghỉ ≥ 0 và returning nằm trong 0–100%.', self.language))
         if self.mode == 'json' and not self.json_path:
-            raise ValueError('Hãy chọn file JSON từ GameAnalytics.')
+            raise ValueError(tr('Hãy chọn file JSON từ GameAnalytics.', self.language))
         if not self.dry_run and (not self.game_key.strip() or not self.secret_key.strip()):
-            raise ValueError('Thiếu Game Key hoặc Secret Key.')
+            raise ValueError(tr('Thiếu Game Key hoặc Secret Key.', self.language))
 
 
 class DesktopRunner:
@@ -75,7 +145,8 @@ class DesktopRunner:
         self.generator.log = self.log
         if config.dry_run:
             self.generator._send = lambda endpoint, payload: self.log(
-                f'[THỬ] /{endpoint} — {payload[0]["category"] if isinstance(payload, list) else "init"}')
+                tr('[THỬ] /{endpoint} — {category}', config.language, endpoint=endpoint,
+                   category=payload[0]["category"] if isinstance(payload, list) else 'init'))
 
     def prepare(self):
         roster = {}
@@ -95,21 +166,22 @@ class DesktopRunner:
                     self._validate_account(account)
                     roster[uid] = account
                 except (ValueError, IndexError) as error:
-                    raise ValueError(f'File trạng thái lỗi ở dòng {number}: {error}') from error
+                    raise ValueError(tr('File trạng thái lỗi ở dòng {number}: {error}',
+                                        self.config.language, number=number, error=error)) from error
 
         imported = set()
         if self.config.mode in ('json', 'mixed') and self.config.json_path:
             events = json.loads(Path(self.config.json_path).read_text(encoding='utf-8-sig'))
             if not isinstance(events, list):
-                raise ValueError('JSON phải là danh sách sự kiện GameAnalytics.')
+                raise ValueError(tr('JSON phải là danh sách sự kiện GameAnalytics.', self.config.language))
             for number, event in enumerate(events, 1):
                 if not isinstance(event, dict):
-                    raise ValueError(f'Sự kiện JSON #{number} không phải object.')
+                    raise ValueError(tr('Sự kiện JSON #{number} không phải object.', self.config.language, number=number))
                 uid = event.get('user_id')
                 if not uid:
                     continue
                 if not isinstance(uid, str) or any(c in uid for c in ',\r\n'):
-                    raise ValueError(f'user_id không hợp lệ ở sự kiện #{number}.')
+                    raise ValueError(tr('user_id không hợp lệ ở sự kiện #{number}.', self.config.language, number=number))
                 account = dict(user_id=uid, session_num=event.get('session_num', 1),
                                last_active=event.get('client_ts', 0),
                                lifetime_session_length=event.get('lifetime_session_length', 0),
@@ -129,12 +201,12 @@ class DesktopRunner:
         returning = (config.users if config.mode in ('saved', 'json') else
                      round(config.users * config.returning_percent / 100) if config.mode == 'mixed' else 0)
         if len(candidates) < returning:
-            raise ValueError(f'Cần {returning} returning user nhưng chỉ có {len(candidates)}. '
-                             'Hãy giảm số lượng hoặc nhập thêm JSON.')
+            raise ValueError(tr('Cần {returning} returning user nhưng chỉ có {available}. Hãy giảm số lượng hoặc nhập thêm JSON.',
+                                config.language, returning=returning, available=len(candidates)))
         new_count = config.users - returning
         if len(roster) + new_count > MAX_TOTAL_USERS:
-            raise ValueError(f'Pool có {len(roster)} user; thêm {new_count} sẽ vượt {MAX_TOTAL_USERS}. '
-                             'Hãy chọn chạy lại user đã có.')
+            raise ValueError(tr('Pool có {count} user; thêm {new_count} sẽ vượt {limit}. Hãy chọn chạy lại user đã có.',
+                                config.language, count=len(roster), new_count=new_count, limit=MAX_TOTAL_USERS))
         active = random.sample(candidates, returning)
         for _ in range(new_count):
             profile = random.choice(self.generator.device_profiles)
@@ -143,23 +215,23 @@ class DesktopRunner:
                            lifetime_session_length=0, from_live_file=False)
             roster[account['user_id']] = account
             active.append(account)
-        self.log(f'[KẾ HOẠCH] {new_count} mới + {returning} returning; '
-                 f'{config.users * config.sessions} phiên; {min(config.users, config.workers)} luồng.')
+        self.log(tr('[KẾ HOẠCH] {new_count} mới + {returning} returning; {sessions} phiên; {workers} luồng.',
+                    config.language, new_count=new_count, returning=returning,
+                    sessions=config.users * config.sessions, workers=min(config.users, config.workers)))
         return active, roster
 
-    @staticmethod
-    def _validate_account(account):
+    def _validate_account(self, account):
         for field in ('session_num', 'lifetime_session_length'):
             value = account[field]
             if not isinstance(value, int) or isinstance(value, bool) or value < 0:
-                raise ValueError(f'{field} phải là số nguyên không âm.')
+                raise ValueError(tr('{field} phải là số nguyên không âm.', self.config.language, field=field))
         timestamp = account['last_active']
         if not isinstance(timestamp, (int, float)) or not math.isfinite(timestamp) or timestamp < 0:
-            raise ValueError('client_ts / last_active không hợp lệ.')
+            raise ValueError(tr('client_ts / last_active không hợp lệ.', self.config.language))
         for field in ('user_id', 'manufacturer', 'device', 'os_version'):
             value = account[field]
             if not isinstance(value, str) or not value or any(c in value for c in ',\r\n'):
-                raise ValueError(f'{field} không hợp lệ.')
+                raise ValueError(tr('{field} không hợp lệ.', self.config.language, field=field))
 
     def _save(self, roster):
         # Replace atomically so an interrupted write cannot truncate the user pool.
@@ -185,7 +257,7 @@ class DesktopRunner:
                 try:
                     result = self.generator.simulate_dynamic_session(account)
                     if result['session_num'] != account['session_num'] + 1:
-                        raise RuntimeError('Không khởi tạo được phiên.')
+                        raise RuntimeError(tr('Không khởi tạo được phiên.', self.config.language))
                     with lock:
                         roster[result['user_id']] = result
                         if not self.config.dry_run:
@@ -197,7 +269,8 @@ class DesktopRunner:
                     with lock:
                         failed += 1
                         self.progress(completed, failed)
-                    self.log(f'[LỖI] User {account["user_id"][:8]}: {error}; dừng user này.')
+                    self.log(tr('[LỖI] User {user}: {error}; dừng user này.', self.config.language,
+                                user=account['user_id'][:8], error=error))
                     break
                 if index + 1 < self.config.sessions and self.stop.wait(self.config.pause_seconds):
                     break
@@ -221,14 +294,24 @@ class DesktopApp:
         self.messages = queue.Queue()
         self.stop = threading.Event()
         self.inputs = []
+        self.lang = 'vi'
         root.title('GameAnalytics • Android Session Tool')
-        root.geometry('940x820')
+        root.geometry('980x860')
         root.minsize(820, 740)
         style = ttk.Style(root)
         if 'vista' in style.theme_names():
             style.theme_use('vista')
         outer = ttk.Frame(root, padding=18)
         outer.pack(fill='both', expand=True)
+        language_row = ttk.Frame(outer)
+        language_row.pack(fill='x', pady=(0, 6))
+        ttk.Label(language_row, text='Ngôn ngữ').pack(side='left', padx=(0, 8))
+        self.language = tk.StringVar(value='Tiếng Việt')
+        language_selector = ttk.Combobox(language_row, textvariable=self.language,
+                                         values=('Tiếng Việt', 'English'), state='readonly', width=14)
+        language_selector.pack(side='left')
+        language_selector.bind('<<ComboboxSelected>>', self.change_language)
+        self.inputs.append((language_selector, 'readonly'))
         ttk.Label(outer, text='Android Session Tool', font=('Segoe UI', 20, 'bold')).pack(anchor='w')
         ttk.Label(outer, text='Cấu hình user và phiên mô phỏng gửi đến GameAnalytics.').pack(anchor='w', pady=(0, 10))
         form = ttk.LabelFrame(outer, text='User & phiên chơi', padding=12)
@@ -247,7 +330,7 @@ class DesktopApp:
             self.inputs.append((widget, 'readonly' if options else 'normal'))
             return widget
 
-        field('Chế độ user', 'mode', 'Tạo user mới', 0, options=list(MODE_LABELS))
+        self.mode_combo = field('Chế độ user', 'mode', 'Tạo user mới', 0, options=list(MODE_LABELS))
         field('Số user', 'users', 1, 0, 2)
         field('Phiên / user', 'sessions', 1, 1)
         field('User đồng thời', 'workers', 1, 1, 2)
@@ -290,7 +373,8 @@ class DesktopApp:
         self.start_button.pack(side='left')
         self.stop_button = ttk.Button(controls, text='Dừng', command=self.request_stop, state='disabled')
         self.stop_button.pack(side='left', padx=8)
-        self.status = tk.StringVar(value='Sẵn sàng • Giới hạn pool: 150 user')
+        self.status = tk.StringVar()
+        self.set_status('Sẵn sàng • Giới hạn pool: {limit} user', limit=MAX_TOTAL_USERS)
         ttk.Label(controls, textvariable=self.status).pack(side='left', padx=8)
         self.bar = ttk.Progressbar(outer)
         self.bar.pack(fill='x', pady=8)
@@ -298,6 +382,36 @@ class DesktopApp:
         self.log_box.pack(fill='both', expand=True)
         self.root.protocol('WM_DELETE_WINDOW', self.close)
         self.root.after(100, self.poll)
+
+    def set_status(self, text, **values):
+        self.status_text = text
+        self.status_values = values
+        self.status.set(tr(text, self.lang, **values))
+
+    def change_language(self, event=None):
+        labels = {tr(label, self.lang): mode for label, mode in MODE_LABELS.items()}
+        selected_mode = labels[self.values['mode'].get()]
+        self.lang = 'en' if self.language.get() == 'English' else 'vi'
+        originals = {translated: source for source, translated in ENGLISH.items()}
+
+        def update_widgets(parent):
+            for widget in parent.winfo_children():
+                if 'text' in widget.keys():
+                    text = widget.cget('text')
+                    source = originals.get(text, text)
+                    if source in ENGLISH and '{' not in source:
+                        widget.configure(text=tr(source, self.lang))
+                update_widgets(widget)
+
+        update_widgets(self.root)
+        self.mode_combo.configure(values=[tr(label, self.lang) for label in MODE_LABELS])
+        self.values['mode'].set(next(tr(label, self.lang) for label, mode in MODE_LABELS.items()
+                                     if mode == selected_mode))
+        # Terminal status labels are stored in the previous language.
+        values = dict(self.status_values)
+        if 'label' in values:
+            values['label'] = tr(originals.get(values['label'], values['label']), self.lang)
+        self.set_status(self.status_text, **values)
 
     def browse(self):
         path = filedialog.askopenfilename(parent=self.root, filetypes=[('GameAnalytics JSON', '*.json')])
@@ -309,16 +423,21 @@ class DesktopApp:
             return
         try:
             values = {key: variable.get().strip() for key, variable in self.values.items()}
-            values['mode'] = MODE_LABELS[values['mode']]
-            for key in ('users', 'sessions', 'workers'):
-                values[key] = int(values[key])
-            for key in ('returning_percent', 'pause_seconds', 'duration_min', 'duration_max', 'action_min', 'action_max'):
-                values[key] = float(values[key])
+            values['mode'] = {tr(label, self.lang): mode for label, mode in MODE_LABELS.items()}[values['mode']]
+            for keys, convert in ((('users', 'sessions', 'workers'), int),
+                                  (('returning_percent', 'pause_seconds', 'duration_min', 'duration_max',
+                                    'action_min', 'action_max'), float)):
+                for key in keys:
+                    try:
+                        values[key] = convert(values[key])
+                    except ValueError:
+                        raise ValueError(tr('Giá trị số không hợp lệ: {name}.', self.lang, name=key)) from None
             config = RunConfig(**values, json_path=self.json_path.get().strip(), dry_run=self.dry_run.get(),
-                               game_key=self.game_key.get().strip(), secret_key=self.secret_key.get().strip())
+                               game_key=self.game_key.get().strip(), secret_key=self.secret_key.get().strip(),
+                               language=self.lang)
             config.validate()
         except (ValueError, KeyError) as error:
-            messagebox.showerror('Cấu hình không hợp lệ', str(error), parent=self.root)
+            messagebox.showerror(tr('Cấu hình không hợp lệ', self.lang), str(error), parent=self.root)
             return
         self.stop.clear()
         self.running = True
@@ -327,8 +446,8 @@ class DesktopApp:
         self.stop_button.configure(state='normal')
         for widget, _ in self.inputs:
             widget.configure(state='disabled')
-        self.status.set('Đang chạy thử…' if config.dry_run else 'Đang gửi dữ liệu thật…')
-        self.append_log('\n=== ' + ('CHẠY THỬ' if config.dry_run else 'GỬI THẬT') + ' ===')
+        self.set_status('Đang chạy thử…' if config.dry_run else 'Đang gửi dữ liệu thật…')
+        self.append_log('\n=== ' + tr('CHẠY THỬ' if config.dry_run else 'GỬI THẬT', self.lang) + ' ===')
 
         def work():
             try:
@@ -352,7 +471,7 @@ class DesktopApp:
     def request_stop(self):
         self.stop.set()
         self.stop_button.configure(state='disabled')
-        self.status.set('Đang dừng và đóng phiên hiện tại…')
+        self.set_status('Đang dừng và đóng phiên hiện tại…')
 
     def close(self):
         if self.running:
@@ -373,7 +492,10 @@ class DesktopApp:
             elif kind == 'progress':
                 done, failed = value
                 self.bar.configure(value=done + failed)
-                self.status.set(f'Xong {done} phiên • Lỗi {failed}' + (' • Đang dừng…' if self.stop.is_set() else ''))
+                if self.stop.is_set():
+                    self.set_status('Đang dừng và đóng phiên hiện tại…')
+                else:
+                    self.set_status('Xong {done} phiên • Lỗi {failed}', done=done, failed=failed)
             else:
                 self.running = False
                 self.start_button.configure(state='normal')
@@ -381,15 +503,15 @@ class DesktopApp:
                 for widget, state in self.inputs:
                     widget.configure(state=state)
                 if kind == 'error':
-                    self.status.set('Không chạy được')
-                    self.append_log('[LỖI] ' + value)
+                    self.set_status('Không chạy được')
+                    self.append_log(tr('[LỖI] ', self.lang) + value)
                     if not self.closing:
-                        messagebox.showerror('Không chạy được', value, parent=self.root)
+                        messagebox.showerror(tr('Không chạy được', self.lang), value, parent=self.root)
                 else:
-                    label = 'Đã dừng' if self.stop.is_set() else 'Hoàn tất đợt chạy'
-                    text = f'{label} • {value["completed"]} phiên xong • {value["failed"]} lỗi'
-                    self.status.set(text)
-                    self.append_log(text)
+                    label = tr('Đã dừng' if self.stop.is_set() else 'Hoàn tất đợt chạy', self.lang)
+                    self.set_status('{label} • {completed} phiên xong • {failed} lỗi', label=label,
+                                    completed=value['completed'], failed=value['failed'])
+                    self.append_log(self.status.get())
                 if self.closing:
                     self.root.destroy()
                     return
